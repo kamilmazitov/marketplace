@@ -9,6 +9,7 @@ class Navbar extends Component {
           className="navbar-brand col-sm-3 col-md-2 mr-0"
           target="_blank"
           rel="noopener noreferrer"
+          href="https://kamilmazitov.com"
         >
           Marketplace
         </a>

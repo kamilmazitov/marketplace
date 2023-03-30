@@ -66,6 +66,29 @@ class Main extends Component {
                       : null
                     }
                     </td>
+                    <td>
+                    { !product.purchased
+                      ? <form
+                          className = 'form-inline'
+                          onSubmit={(event) => {
+                          event.preventDefault()
+                          const price = window.web3.utils.toWei(this.productPrice.value.toString(), 'Ether')
+                          this.props.changeProductPrice(product.id, price)
+                        }}>
+                          <div className="form-group mr-sm-2">
+                            <input
+                              id="productPrice"
+                              type="text"
+                              ref={(input) => { this.productPrice = input }}
+                              className="form-control"
+                              placeholder="Product Price"
+                              required />
+                          </div>
+                          <button type="submit" className="btn btn-primary">Change Price</button>
+                        </form>
+                      : null
+                    }
+                    </td>
                 </tr>
               )
             })}

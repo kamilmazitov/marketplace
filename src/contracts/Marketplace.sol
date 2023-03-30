@@ -29,6 +29,14 @@ contract Marketplace {
         bool purchased
     );
 
+    event ProductPriceChanged(
+        uint id,
+        string name,
+        uint price,
+        address payable owner,
+        bool purchased
+    );
+
     constructor() public {
         name = "Marketplace";
     }
@@ -69,5 +77,16 @@ contract Marketplace {
         address(_seller).transfer(msg.value);
         // Trigger an event
         emit ProductPurchased(productCount, _product.name, _product.price, msg.sender, true);
+    }
+
+    function changeProductPrice(uint _id, uint _newPrice) public {
+        require(_id <= productCount, "Product does not exist");
+        // Fetch the product
+        Product memory _product = products[_id];
+        _product.price = _newPrice;
+        // Update the product
+        products[_id] = _product;
+
+        emit ProductPriceChanged(_id, _product.name, _newPrice, msg.sender, true);
     }
 }
